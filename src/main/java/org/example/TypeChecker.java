@@ -16,7 +16,7 @@ public class TypeChecker {
         }
     }
 
-    public double isDouble(String dataString) {
+    public Double isDouble(String dataString) {
         try {
             return Double.parseDouble(dataString);
         } catch (Exception e) {
