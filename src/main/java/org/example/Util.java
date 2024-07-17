@@ -65,12 +65,14 @@ consectetur adipiscing
 
 
 public class Util {
+    private static CLIParser parser = new CLIParser();
     public static void main(String[] args) {
         List<String> allArgs = List.of(args);
 //        System.out.println(Arrays.toString(args));
         System.out.println(allArgs);
-
-
         System.out.println("Hello world!");
+        System.out.println("-------");
+        parser.parse(args);
+
     }
 }

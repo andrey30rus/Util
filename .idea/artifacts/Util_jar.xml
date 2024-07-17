@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Util_jar</output-path>
     <root id="archive" name="Util.jar">
       <element id="module-output" name="Util" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-cli/commons-cli/1.8.0/commons-cli-1.8.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
