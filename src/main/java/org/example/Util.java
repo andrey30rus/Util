@@ -1,4 +1,5 @@
 package org.example;
+
 import java.util.List;
 import java.util.Map;
 
@@ -64,18 +65,14 @@ consectetur adipiscing
   */
 
 
-
 public class Util {
     private static CLIParser parser = new CLIParser();
+
     public static void main(String[] args) {
         parser.parse(args);
         Map<String, String> options = parser.getOptionsMap();
         List<String> targetFilesList = parser.getTargetFilesList();
-//        System.out.println(options);
-//        System.out.println(targetFilesList);
-        System.out.println("------");
         FileHandler fileHandler = new FileHandler(options, targetFilesList);
-//        fileHandler.processTargetFiles();
         fileHandler.processFilesList();
     }
 }

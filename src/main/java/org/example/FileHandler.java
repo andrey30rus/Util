@@ -19,14 +19,12 @@ public class FileHandler {
             throw new RuntimeException(e);
         }
         currentDir = currentDirFile.getParent();
-
     }
 
     public FileHandler(Map<String, String> options, List<String> targetFilesList) {
         this.options = options;
         this.targetFilesList = targetFilesList;
         this.append = options.containsKey("append");
-
     }
 
     public void processFilesList() {
@@ -56,9 +54,7 @@ public class FileHandler {
                 }
             }
         }
-
         closeBufferReader(bufferedReadersList);
-        System.out.println(dataTypesMap);
         proceedWithResultMapAndWriteToFile(dataTypesMap);
     }
 
@@ -67,7 +63,6 @@ public class FileHandler {
         for (Map.Entry<String, Queue<String>> entry : dataTypesMap.entrySet()) {
             String dataType = entry.getKey();
             Queue<String> queue = entry.getValue();
-            System.out.println(queue);
             try {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePathNoFileName + dataType + ".txt", append));
                 while (!queue.isEmpty()) {

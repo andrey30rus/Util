@@ -3,21 +3,13 @@ package org.example;
 import org.apache.commons.cli.*;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CLIParser {
-    private List<String> targetFilesList = new ArrayList<>();
     private final Map<String, String> optionsMap = new HashMap<>();
-
-    public List<String> getTargetFilesList() {
-        return targetFilesList;
-    }
-
-    public Map<String, String> getOptionsMap() {
-        return optionsMap;
-    }
-
     private final Options options = new Options();
     private final Option output = Option.builder("o")
             .longOpt("output")
@@ -43,6 +35,7 @@ public class CLIParser {
             .longOpt("append")
             .desc("append to exist files")
             .build();
+    private List<String> targetFilesList = new ArrayList<>();
 
     {
         options.addOption(output);
@@ -50,21 +43,19 @@ public class CLIParser {
         options.addOption(shortStat);
         options.addOption(fullStat);
         options.addOption(append);
-        File currentDirFile;
-        try {
-            currentDirFile = new File(CLIParser.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        final String currentDir = currentDirFile.getParent();
+    }
 
+    public List<String> getTargetFilesList() {
+        return targetFilesList;
+    }
+
+    public Map<String, String> getOptionsMap() {
+        return optionsMap;
     }
 
     public void parse(String[] args) {
-        // create the parser
-
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmdLine = null;
+        CommandLine cmdLine;
         try {
             cmdLine = parser.parse(options, args);
             Option[] optionsList = cmdLine.getOptions();
@@ -72,13 +63,7 @@ public class CLIParser {
             for (Option option : optionsList) {
                 optionsMap.put(option.getLongOpt(), option.getValue());
             }
-//            String output = cmdLine.getOptionValue("output");
-//            System.out.println(output);
-//            if (cmdLine.hasOption("s")) {
-//                System.out.println("Short Stat is set");
-//            }
             targetFilesList = cmdLine.getArgList().stream().filter(this::isExistTxtFile).toList();
-//            System.out.println(targetFilesList + "-: targetFilesList");
         } catch (ParseException exp) {
             System.err.println("Parsing failed.  Reason: " + exp.getMessage());
         }

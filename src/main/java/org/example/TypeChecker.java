@@ -29,6 +29,7 @@ public class TypeChecker {
             return false;
         }
     }
+
     private boolean isLong(String value) {
         try {
             Long.parseLong(value);
