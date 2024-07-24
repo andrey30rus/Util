@@ -1,26 +1,40 @@
 package org.example;
 
 public class TypeChecker {
-    String dataString;
 
-    public TypeChecker(String dataString) {
-        this.dataString = dataString;
+    public String checkDataType(String value) {
+        if (value == null) {
+            return null;
+        } else if (isInteger(value) || isLong(value)) {
+            return "integers";
+        } else if (isFloat(value)) {
+            return "ﬂoats";
+        } else return "strings";
     }
 
-    public boolean isInteger(String dataString) {
+    private boolean isInteger(String value) {
         try {
-            Integer.parseInt(dataString);
+            Integer.parseInt(value);
             return true;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public Double isDouble(String dataString) {
+    private boolean isFloat(String value) {
         try {
-            return Double.parseDouble(dataString);
-        } catch (Exception e) {
+            Float.parseFloat(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return null;
+    }
+    private boolean isLong(String value) {
+        try {
+            Long.parseLong(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package org.example;
 import java.util.List;
+import java.util.Map;
 
 /*
 -o (output) Args() ex. -o /some/path
@@ -67,12 +68,14 @@ consectetur adipiscing
 public class Util {
     private static CLIParser parser = new CLIParser();
     public static void main(String[] args) {
-        List<String> allArgs = List.of(args);
-//        System.out.println(Arrays.toString(args));
-        System.out.println(allArgs);
-        System.out.println("Hello world!");
-        System.out.println("-------");
         parser.parse(args);
-
+        Map<String, String> options = parser.getOptionsMap();
+        List<String> targetFilesList = parser.getTargetFilesList();
+//        System.out.println(options);
+//        System.out.println(targetFilesList);
+        System.out.println("------");
+        FileHandler fileHandler = new FileHandler(options, targetFilesList);
+//        fileHandler.processTargetFiles();
+        fileHandler.processFilesList();
     }
 }
