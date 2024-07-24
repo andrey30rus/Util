@@ -66,7 +66,7 @@ consectetur adipiscing
 
 
 public class Util {
-    private static CLIParser parser = new CLIParser();
+    private static final CLIParser parser = new CLIParser();
 
     public static void main(String[] args) {
         parser.parse(args);
