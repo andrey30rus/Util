@@ -60,7 +60,7 @@ public class FileHandler {
             for (BufferedReader reader : bufferedReadersList) {
                 try {
                     String line = reader.readLine();
-                    if (line != null) {
+                    if (line != null && !line.isEmpty()) {
                         filesNotEmpty = true;
                         String dataType = typeChecker.checkDataType(line.strip());
                         Queue<String> queue = dataTypesMap.computeIfAbsent(dataType, k -> new LinkedList<>());
@@ -127,7 +127,7 @@ public class FileHandler {
 
     private String addPrefix(String filePath, String prefix) {
         if (!(prefix == null)) {
-            filePath = filePath + prefix;
+            filePath = filePath + "/"+ prefix;
         }
         return filePath;
     }
