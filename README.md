@@ -40,8 +40,8 @@
 2. **Склонируйте репозиторий:**
 
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/andrey30rus/Util.git
+   cd Util
     ```
 3. **Соберите проект с помощью Maven:**
 
@@ -77,7 +77,7 @@
     1234567890123456789
 ### Пример запуска утилиты:
 ```bash
-  java -jar target/Util-1.0-SNAPSHOT.jar -s -a -p sample- in1.txt in2.txt
+  java -jar target/Util-1.0-SNAPSHOT-jar-with-dependencies.jar -s -a -p sample- in1.txt in2.txt
 ```
 ### Пример выходных файлов:
 #### sample-integers.txt:
@@ -102,6 +102,9 @@
     - **Версия**: 1.8.0
     - **Ссылка**: [commons-cli на Maven Central](https://mvnrepository.com/artifact/commons-cli/commons-cli)
     - **Ссылка**: [Official Page](https://commons.apache.org/proper/commons-cli/)
+- **maven-assembly-plugin** плагин для сборки проекта
+    - **Ссылка**: [maven-assembly-plugin на Maven Central](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin)
+    - **Ссылка**: [Official Page](https://maven.apache.org/plugins/maven-assembly-plugin/index.html)
 ## Особенности реализации
 - **Проект разработан на Java 22.**
 - **Используется Apache Maven 3.9.6 для сборки проекта.**
