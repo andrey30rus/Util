@@ -1,11 +1,14 @@
 package org.example;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class TypeChecker {
 
     public String checkDataType(String value) {
         if (value == null) {
             return null;
-        } else if (isInteger(value) || isLong(value)) {
+        } else if (isInteger(value)) {
             return "integers";
         } else if (isFloat(value)) {
             return "ﬂoats";
@@ -14,7 +17,7 @@ public class TypeChecker {
 
     private boolean isInteger(String value) {
         try {
-            Integer.parseInt(value);
+            BigInteger val = new BigInteger(value);
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -23,16 +26,7 @@ public class TypeChecker {
 
     private boolean isFloat(String value) {
         try {
-            Float.parseFloat(value);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private boolean isLong(String value) {
-        try {
-            Long.parseLong(value);
+            BigDecimal val = new BigDecimal(value);
             return true;
         } catch (NumberFormatException e) {
             return false;

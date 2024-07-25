@@ -72,7 +72,8 @@ public class Util {
         parser.parse(args);
         Map<String, String> options = parser.getOptionsMap();
         List<String> targetFilesList = parser.getTargetFilesList();
-        FileHandler fileHandler = new FileHandler(options, targetFilesList);
+        TypeChecker typeChecker = new TypeChecker();
+        FileHandler fileHandler = new FileHandler(options, targetFilesList, typeChecker);
         fileHandler.processFilesList();
     }
 }
