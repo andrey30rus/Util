@@ -1,7 +1,6 @@
 package org.example;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.*;
 
 
@@ -11,18 +10,8 @@ public class FileHandler {
     private final boolean append;
     private final boolean shortStats;
     private final boolean fullStats;
-    private final String currentDir;
     private final TypeChecker typeChecker;
 
-    {
-        File currentDirFile;
-        try {
-            currentDirFile = new File(CLIParser.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        currentDir = currentDirFile.getParent();
-    }
 
     public FileHandler(Map<String, String> options, List<String> targetFilesList, TypeChecker typeChecker) {
         this.options = options;
@@ -80,12 +69,14 @@ public class FileHandler {
 
     private void proceedWithResultMapAndWriteToFile(Map<String, Queue<String>> dataTypesMap) {
         String filePathNoFileName = buildFilePath();
-        System.out.println(filePathNoFileName);
+        System.out.println("filePathNoFileName" + filePathNoFileName);
+        String prefix = options.getOrDefault("prefix", "");
+        System.out.println(prefix);
         for (Map.Entry<String, Queue<String>> entry : dataTypesMap.entrySet()) {
             String dataType = entry.getKey();
             Queue<String> queue = entry.getValue();
             try {
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePathNoFileName + dataType + ".txt", append));
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePathNoFileName + prefix + dataType + ".txt", append));
                 while (!queue.isEmpty()) {
                     String data = queue.poll();
                     bufferedWriter.write(data + '\n');
@@ -96,7 +87,6 @@ public class FileHandler {
             }
         }
     }
-
 
     private void closeBufferReader(List<BufferedReader> bufferedReadersList) {
         for (BufferedReader reader : bufferedReadersList) {
@@ -111,23 +101,16 @@ public class FileHandler {
     }
 
     public String buildFilePath() {
-        //todo need fix
-        String filePath = currentDir;
+        String filePath = "";
         if (!(options.get("output") == null)) {
             filePath = options.get("output");
+            if (!filePath.endsWith("/")) {
+                filePath = filePath + "/";
+            }
             File directory = new File(filePath);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-        }
-        String prefix = options.get("prefix");
-        filePath = addPrefix(filePath, prefix);
-        return filePath;
-    }
-
-    private String addPrefix(String filePath, String prefix) {
-        if (!(prefix == null)) {
-            filePath = filePath + "/"+ prefix;
         }
         return filePath;
     }

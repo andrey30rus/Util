@@ -86,8 +86,6 @@
     100500
 
 #### sample-floats.txt:
-    diff
-    Copy code
     1.528535047E-25
     3.1415
     -0.001
