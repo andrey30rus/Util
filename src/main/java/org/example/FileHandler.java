@@ -69,9 +69,7 @@ public class FileHandler {
 
     private void proceedWithResultMapAndWriteToFile(Map<String, Queue<String>> dataTypesMap) {
         String filePathNoFileName = buildFilePath();
-        System.out.println("filePathNoFileName" + filePathNoFileName);
         String prefix = options.getOrDefault("prefix", "");
-        System.out.println(prefix);
         for (Map.Entry<String, Queue<String>> entry : dataTypesMap.entrySet()) {
             String dataType = entry.getKey();
             Queue<String> queue = entry.getValue();
